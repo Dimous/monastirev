@@ -107,7 +107,7 @@ namespace io.github.dimous.reviews.models {
         //---
         
         private validate(__review: TReview): TValidationRule[] {
-            return Validator.apply(__review.name, [{"pattern": /^[a-zа-я]{3,}$/i, "message": "Имя должно состоять из как минимум трёх символов латинского или кириллического алфавита"}]).concat(Validator.apply(__review.email, [{"pattern": /^([a-z0-9_\.\-])+\@(([a-z0-9\-])+\.)+([a-z0-9]{2,4})+$/i, "message": "Неверный формат e-mail"}]), Validator.apply(__review.text, [{"pattern": /^[a-zа-я\d\s\t\.\,\-]{3,255}$/i, "message": "Текст отзыва должен содержать не менее 3 и не более 255 символов"}]));
+            return Validator.apply(__review.name, [{"pattern": /^[a-zа-я]{3,}$/i, "message": "Имя должно состоять из как минимум трёх символов латинского или кириллического алфавита"}]).concat(Validator.apply(__review.email, [{"pattern": /^([a-z0-9_\.\-])+\@(([a-z0-9\-])+\.)+([a-z0-9]{2,4})+$/i, "message": "Неверный формат e-mail"}]), Validator.apply(__review.text, [{"pattern": /.{3,255}/i, "message": "Текст отзыва должен содержать не менее 3 и не более 255 символов"}]));
         }
         //---
 
