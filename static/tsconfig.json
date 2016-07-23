@@ -1,11 +1,21 @@
 {
     "compilerOptions": {
+        "watch": true,
+        "jsx": "react",
         "target": "ES3",
         "module": "amd",
-        "noImplicitAny": false,
-        "removeComments": true,
-        "preserveConstEnums": true,
+        "pretty": false,
+        "charset": "utf8",
+        "locale": "ru_RU",
         "sourceMap": false,
-        "outFile": "main.js"
+        "outFile": "main.js",
+        "noEmitOnError": true,
+        "noImplicitAny": true,
+        "removeComments": true,
+        "noImplicitThis": true,
+        "strictNullChecks": true,
+        "noImplicitReturns": true,
+        "preserveConstEnums": true,
+        "forceConsistentCasingInFileNames": true
     }
 }

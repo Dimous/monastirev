@@ -12,11 +12,11 @@ namespace io.github.dimous.reviews.models {
     "use strict";    
     
     class Validator {
-        public static apply(__string_value: string, __array_validation_rules: TValidationRule[]): TValidationRule[] {
+        public static apply(__string_value: string | null, __array_validation_rules: TValidationRule[]): TValidationRule[] {
             const __array_validation_rules_that_failed: TValidationRule[] = [];
             ///
             for (const __validation_rule of __array_validation_rules)
-                if (! __validation_rule.pattern.test(__string_value)) __array_validation_rules_that_failed.push(__validation_rule);
+                if (null === __string_value || ! __validation_rule.pattern.test(__string_value)) __array_validation_rules_that_failed.push(__validation_rule);
             ///
             return __array_validation_rules_that_failed;
         }

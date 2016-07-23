@@ -12,10 +12,10 @@ namespace io.github.dimous.reviews {
     export class Application extends Register {
         private static io_github_dimous_reviews_Application__instance: Application = new Application(); 
         ///
-        constructor() {
+        private constructor() {
             super();
             ///
-            if (Boolean(Application.io_github_dimous_reviews_Application__instance)) throw new Error("Это синглтон");           
+            if (Application.io_github_dimous_reviews_Application__instance instanceof Application) throw new Error("Это одиночка");           
         }
         //---        
 

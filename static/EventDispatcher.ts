@@ -36,16 +36,13 @@ namespace io.github.dimous.reviews {
         }
         //---
 
-        /**
-         * модификации по ссылке не проходят, незачем делать слайс
-         */
         public trigger(__event: IEvent): void {
             const __string_type: string = __event.getType();
             ///
             if (this.has(__string_type)) {
-                if (void 0 === __event.getTarget()) __event.setTarget(this);
+                if (undefined === __event.getTarget()) __event.setTarget(this);
                 ///
-                this.io_github_dimous_EventDispatcher__object_event_listener_store[__string_type]/*.slice()*/.forEach((__function_current_listener: TEventListener): void => __function_current_listener(__event));
+                this.io_github_dimous_EventDispatcher__object_event_listener_store[__string_type].slice().forEach((__function_current_listener: TEventListener): void => __function_current_listener(__event));
             }
         }
     }

@@ -53,7 +53,7 @@ namespace io.github.dimous.reviews {
         }
         //---
         
-        public retrieve(__string_name: string): IInjectable {
+        public retrieve(__string_name: string): IInjectable | null {
             return this.has(__string_name) ? this.io_github_dimous_reviews_Register__injectable_store[__string_name] : null;
         }
     }

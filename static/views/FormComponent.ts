@@ -86,9 +86,9 @@ namespace io.github.dimous.reviews.views {
         private onPreviewClick(__event: JQueryMouseEventObject): void {
             __event.preventDefault();
             ///
-            const __event_dispatcher: EventDispatcher = this.getEventDispatcher(), __jquery_serialize_jquery_element: JQuerySerializeArrayElement[] = this.io_github_dimous_reviews_views_FormComponent__jquery_form.serializeArray(), __file_list: FileList = (this.io_github_dimous_reviews_views_FormComponent__jquery_input_image.get(0) as HTMLInputElement).files;
+            const __event_dispatcher: EventDispatcher = this.getEventDispatcher(), __jquery_serialize_jquery_element: JQuerySerializeArrayElement[] = this.io_github_dimous_reviews_views_FormComponent__jquery_form.serializeArray(), __file_list: FileList | null = (this.io_github_dimous_reviews_views_FormComponent__jquery_input_image.get(0) as HTMLInputElement).files;
             ///
-            if (0 < __file_list.length) {
+            if (null !== __file_list && 0 < __file_list.length) {
                 const __file_reader = new FileReader();
                 ///
                 __file_reader.onload = (__event: Event): void => {

@@ -11,7 +11,7 @@ namespace io.github.dimous.reviews.events {
         private io_github_dimous_reviews_events_Event__any_target: any;
         private io_github_dimous_reviews_events_Event__string_type: string;
         ///
-        constructor(__string_type?: string, __any_data?: any) {
+        constructor(__string_type: string, __any_data?: any) {
             this.setData(__any_data);
             this.setType(__string_type);
         }

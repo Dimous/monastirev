@@ -34,9 +34,9 @@ var io;
                     EventDispatcher.prototype.trigger = function (__event) {
                         var __string_type = __event.getType();
                         if (this.has(__string_type)) {
-                            if (void 0 === __event.getTarget())
+                            if (undefined === __event.getTarget())
                                 __event.setTarget(this);
-                            this.io_github_dimous_EventDispatcher__object_event_listener_store[__string_type].forEach(function (__function_current_listener) { return __function_current_listener(__event); });
+                            this.io_github_dimous_EventDispatcher__object_event_listener_store[__string_type].slice().forEach(function (__function_current_listener) { return __function_current_listener(__event); });
                         }
                     };
                     return EventDispatcher;
@@ -194,8 +194,8 @@ var io;
                     __extends(Application, _super);
                     function Application() {
                         _super.call(this);
-                        if (Boolean(Application.io_github_dimous_reviews_Application__instance))
-                            throw new Error("Это синглтон");
+                        if (Application.io_github_dimous_reviews_Application__instance instanceof Application)
+                            throw new Error("Это одиночка");
                     }
                     Application.getInstance = function () {
                         return Application.io_github_dimous_reviews_Application__instance;
@@ -253,7 +253,7 @@ var io;
                             var __array_validation_rules_that_failed = [];
                             for (var _i = 0, ___array_validation_rules_1 = __array_validation_rules; _i < ___array_validation_rules_1.length; _i++) {
                                 var __validation_rule = ___array_validation_rules_1[_i];
-                                if (!__validation_rule.pattern.test(__string_value))
+                                if (null === __string_value || !__validation_rule.pattern.test(__string_value))
                                     __array_validation_rules_that_failed.push(__validation_rule);
                             }
                             return __array_validation_rules_that_failed;
@@ -319,7 +319,7 @@ var io;
                             return __review;
                         };
                         ReviewsModel.prototype.validate = function (__review) {
-                            return Validator.apply(__review.name, [{ "pattern": /^[a-zа-я]{3,}$/i, "message": "Имя должно состоять из как минимум трёх символов латинского или кириллического алфавита" }]).concat(Validator.apply(__review.email, [{ "pattern": /^([a-z0-9_\.\-])+\@(([a-z0-9\-])+\.)+([a-z0-9]{2,4})+$/i, "message": "Неверный формат e-mail" }]), Validator.apply(__review.text, [{ "pattern": /^.{3,255}$/i, "message": "Текст отзыва должен содержать не менее 3 и не более 255 символов" }]));
+                            return Validator.apply(__review.name, [{ "pattern": /^[a-zа-я]{3,}$/i, "message": "Имя должно состоять из как минимум трёх символов латинского или кириллического алфавита" }]).concat(Validator.apply(__review.email, [{ "pattern": /^([a-z0-9_\.\-])+\@(([a-z0-9\-])+\.)+([a-z0-9]{2,4})+$/i, "message": "Неверный формат e-mail" }]), Validator.apply(__review.text, [{ "pattern": /.{3,255}/i, "message": "Текст отзыва должен содержать не менее 3 и не более 255 символов" }]));
                         };
                         ReviewsModel.prototype.onSort = function (__event) {
                             this.setReviewComparator(__event.getData());
@@ -421,7 +421,7 @@ var io;
                         FormComponent.prototype.onPreviewClick = function (__event) {
                             __event.preventDefault();
                             var __event_dispatcher = this.getEventDispatcher(), __jquery_serialize_jquery_element = this.io_github_dimous_reviews_views_FormComponent__jquery_form.serializeArray(), __file_list = this.io_github_dimous_reviews_views_FormComponent__jquery_input_image.get(0).files;
-                            if (0 < __file_list.length) {
+                            if (null !== __file_list && 0 < __file_list.length) {
                                 var __file_reader = new FileReader();
                                 __file_reader.onload = function (__event) {
                                     __jquery_serialize_jquery_element.push({ "name": "image", "value": __event.target.result });
@@ -512,7 +512,7 @@ var io;
                             var __reviews_model = reviews.Application.getInstance().retrieve(reviews.models.ReviewsModel.STRING_NAME);
                             this.io_github_dimous_reviews_views_ReviewListComponent__jquery_view.empty();
                             __reviews_model.getReviews().map(function (__review) {
-                                var __date = new Date(), __string_edited_badge = 2 === __review.state ? "<span class=\"badge pull-right\">\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u043C\u043E\u0434\u0435\u0440\u0430\u0442\u043E\u0440\u043E\u043C</span>" : "", __string_body = Boolean(__review.image) ? "<p >" + __review.text + "</p><div class=\"thumbnail\"><img src=\"" + (__review.preview ? "" : "/static/images/") + __review.image + "\"></div>" : __review.text;
+                                var __date = new Date(), __string_edited_badge = 2 === __review.state ? "<span class=\"badge pull-right\">\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u043C\u043E\u0434\u0435\u0440\u0430\u0442\u043E\u0440\u043E\u043C</span>" : "", __string_body = null !== __review.image ? "<p >" + __review.text + "</p><div class=\"thumbnail\"><img src=\"" + (__review.preview ? "" : "/static/images/") + __review.image + "\"></div>" : __review.text;
                                 __date.setTime(__review.date);
                                 $("<div style=\"display: none\" class=\"col-md-12\">\n                    <div class=\"panel " + (__review.preview ? "panel-info" : "panel-default") + "\">\n                        <div class=\"panel-heading\">" + __review.name + " (" + __review.email + "), " + __date.toLocaleDateString() + " " + __date.toLocaleTimeString() + " " + __string_edited_badge + "</div>\n                        <div class=\"panel-body\">" + __string_body + "</div>\n                    </div>\n                </div>").appendTo(_this.io_github_dimous_reviews_views_ReviewListComponent__jquery_view).slideDown("fast");
                             });

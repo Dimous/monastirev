@@ -6,10 +6,10 @@
 namespace io.github.dimous.reviews {
     export type TReview = {
         date: number;
-        name: string;
-        text: string;
-        email: string;
-        image: string;
+        name: string | null;
+        text: string | null;
+        email: string | null;
+        image: string | null;
         state: number;
         preview?: boolean;
         

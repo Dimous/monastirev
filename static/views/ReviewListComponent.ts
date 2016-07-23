@@ -45,7 +45,7 @@ namespace io.github.dimous.reviews.views {
             this.io_github_dimous_reviews_views_ReviewListComponent__jquery_view.empty();
             ///
             __reviews_model.getReviews().map((__review: TReview): void => {
-                const __date: Date = new Date(), __string_edited_badge = 2 === __review.state ? `<span class="badge pull-right">правлено модератором</span>` : "", __string_body: string = Boolean(__review.image) ? `<p >${__review.text}</p><div class="thumbnail"><img src="${__review.preview ? "" : "/static/images/"}${__review.image}"></div>` : __review.text;
+                const __date: Date = new Date(), __string_edited_badge = 2 === __review.state ? `<span class="badge pull-right">правлено модератором</span>` : "", __string_body: string | null = null !== __review.image ? `<p >${__review.text}</p><div class="thumbnail"><img src="${__review.preview ? "" : "/static/images/"}${__review.image}"></div>` : __review.text;
                 ///
                 __date.setTime(__review.date);
                 ///
