@@ -96,7 +96,7 @@ namespace io.github.dimous.reviews.models {
         //---
 
         private mapFormData(__array_form_datas: TFormData[]): TReview {
-            const __review: TReview = {"date": new Date().getTime(), "name": null, "text": null, "email": null, "image": null, "state": 1};
+            const __review: TReview & IMap<any> = {"date": new Date().getTime(), "name": null, "text": null, "email": null, "image": null, "state": 1};
             ///
             __array_form_datas.map((__form_data: TFormData): void => {
                 if (__form_data.name in __review) __review[__form_data.name] = __form_data.value;

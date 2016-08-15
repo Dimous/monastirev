@@ -12,7 +12,5 @@ namespace io.github.dimous.reviews {
         image: string | null;
         state: number;
         preview?: boolean;
-        
-        [__string_key: string]: any;
     };
 }

@@ -5,13 +5,12 @@
  
 ///<reference path="./IEvent.ts" />
 ///<reference path="./TEventListener.ts" />
-///<reference path="./TEventListenerStore.ts" />
 
 namespace io.github.dimous.reviews {
     "use strict";
 
     export class EventDispatcher {
-        private io_github_dimous_EventDispatcher__object_event_listener_store: TEventListenerStore = {};
+        private io_github_dimous_EventDispatcher__object_event_listener_store: IMap<TEventListener[]> = {};
         ///
         public has(__string_type: string): boolean {
             return __string_type in this.io_github_dimous_EventDispatcher__object_event_listener_store;

@@ -4,7 +4,6 @@
  */
 
 ///<reference path="./IInjectable.ts" />
-///<reference path="./TInjectableStore.ts" />
 ///<reference path="./EventDispatcher.ts" />
 
 namespace io.github.dimous.reviews {
@@ -13,7 +12,7 @@ namespace io.github.dimous.reviews {
     export class Register {       
         protected __event_dispatcher: EventDispatcher;
         
-        private io_github_dimous_reviews_Register__injectable_store: TInjectableStore;
+        private io_github_dimous_reviews_Register__injectable_store: IMap<IInjectable>;
         ///
         constructor() {
             this.__event_dispatcher = new EventDispatcher();
