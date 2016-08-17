@@ -4,8 +4,8 @@
  * @copyright (c) 2016, Dimous
  */
 
-namespace Core {
-    class ViewController {
+namespace core {
+    class BaseController {
         protected $_oTemplate = NULL;
         ///
         public function __construct() {

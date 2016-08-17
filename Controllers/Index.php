@@ -4,11 +4,11 @@
  * @copyright (c) 2016, Dimous
  */
 
-namespace Controllers {
-    final class Index extends \Core\ViewController {
+namespace controllers {
+    final class Index extends \core\BaseController {
         private $__oPdo = NULL;
         
-        protected $_sTemplateFileName = "Views/main.php";
+        protected $_sTemplateFileName = "views/main.php";
         
         const THUMB_WIDTH = 320, THUMB_HEIGHT = 240;
         ///
@@ -22,7 +22,7 @@ namespace Controllers {
         //---
         
         public function index() {
-            return $this->_oTemplate->render("Views/index.phtml");
+            return $this->_oTemplate->render("views/index.phtml");
         }
         //---
         
@@ -30,6 +30,7 @@ namespace Controllers {
             $aReviews = [];
             ///
             try {
+                // @todo вынести в модель
                 foreach ($this->__oPdo->query("SELECT *, state + 0 AS state FROM reviews WHERE status = 1")->fetchAll() as $oReview)
                     $aReviews[] = ["state" => (int) $oReview["state"], "date" => $oReview["date"], "name" => $oReview["name"], "email" => $oReview["email"], "text" => $oReview["text"], "image" => $oReview["image"]];    
             } catch (\PDOException $oPDOException) {
@@ -55,6 +56,7 @@ namespace Controllers {
                 $oImageMagic->destroy();                
             }
             ///
+            // @todo вынести в модель
             $oStatement = $this->__oPdo->prepare("INSERT INTO reviews(status, state, date, name, email, text, image) VALUES(0, 1, :date, :name, :email, :text, :image)");
             ///
             $oStatement->bindParam(":date", strval(1000 * time()), \PDO::PARAM_STR); // храним как набор символов, чтобы не делать сложных преобразований для js (дата в миллисекундах)

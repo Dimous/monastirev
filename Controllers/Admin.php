@@ -4,11 +4,11 @@
  * @copyright (c) 2016, Dimous
  */
 
-namespace Controllers {
-    final class Admin extends \Core\ViewController {
+namespace controllers {
+    final class Admin extends \core\BaseController {
         private $__oPdo = NULL;
 
-        protected $_sTemplateFileName = "Views/main.php";
+        protected $_sTemplateFileName = "views/main.php";
 
         function __construct($oSettings) {
             parent::__construct();
@@ -35,6 +35,7 @@ namespace Controllers {
             ///
             if ("POST" === filter_input(INPUT_SERVER, "REQUEST_METHOD")) {
                 $nFilter = FILTER_SANITIZE_FULL_SPECIAL_CHARS | FILTER_SANITIZE_ENCODED;
+                // @todo вынести в модель
                 $oStatement = $this->__oPdo->prepare("SELECT EXISTS(SELECT 1 FROM users WHERE login = :login AND password = PASSWORD(:password)) as result");
                 ///
                 $oStatement->bindParam(":login", filter_input(INPUT_POST, "login", $nFilter), \PDO::PARAM_STR);
@@ -54,7 +55,7 @@ namespace Controllers {
                 }
             }
             ///
-            return $this->_oTemplate->render("Views/admin/login.phtml");
+            return $this->_oTemplate->render("views/admin/login.phtml");
         }
         //---
         
@@ -73,7 +74,7 @@ namespace Controllers {
             } catch (\PDOException $oPDOException) {
             }
             ///
-            return $this->_oTemplate->render("Views/admin/dashboard.phtml");
+            return $this->_oTemplate->render("views/admin/dashboard.phtml");
         }
         //---
         
@@ -90,6 +91,7 @@ namespace Controllers {
             ///
             if (array_key_exists("text", $_POST)) $aKeys[] = "state = 2"; // особая уличная магия
             ///
+            // @todo вынести в модель
             $oStatement = $this->__oPdo->prepare(sprintf("UPDATE reviews SET %s WHERE id = :id", implode(", ", $aKeys)));
             ///
             $oStatement->bindParam(":id", filter_input(INPUT_POST, "id", FILTER_SANITIZE_NUMBER_INT), \PDO::PARAM_INT); // INPUT_REQUEST ещё не реализован

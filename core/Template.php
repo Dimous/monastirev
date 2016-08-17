@@ -4,7 +4,7 @@
  * @copyright (c) 2016, Dimous
  */
 
-namespace Core {    
+namespace core {    
     final class Template {
         private $__sFile = NULL, $__oData = NULL;
         ///
